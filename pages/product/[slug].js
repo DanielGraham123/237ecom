@@ -136,7 +136,7 @@ export const getStaticPaths = async (ctx) => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]`;
-  const productsQuery = '*[_type == "product"]';
+  const productsQuery = `*[_type == "product" && slug.current != "${slug}"]`;
 
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
